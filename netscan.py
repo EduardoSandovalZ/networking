@@ -2,7 +2,6 @@ from scapy.all import ARP, Ether, srp
 import datetime
 import speedtest
 import pytz
-import json
 from pymongo import MongoClient
 
 # Función para obtener la fecha y hora actual en la Ciudad de México
@@ -59,29 +58,29 @@ def scan_and_save(ip_range):
                 'Carga': upload_speed
             }
         })
-
-    # Crear el nombre del archivo JSON con la fecha, hora y minutos
-    output_file = f"json_casa/datos_red_{format_datetime()}.json"
-
-        # Guardar en un archivo JSON
-    with open(output_file, 'w') as json_file:
-        json.dump(data_list, json_file, indent=2)
-
-    print(f"Datos guardados en {output_file}.")
-
     # Conectar a la base de datos MongoDB
     client = MongoClient('mongodb://localhost:27017/')
-    db = client['NetScanBUAP']
-    collection = db['fcc']
+    db = client['Test']
+    collection = db['net']
 
-        # Insertar los datos en la base de datos
+    # Insertar los datos en la base de datos
     try:
         collection.insert_many(data_list)
         print("Datos insertados en la base de datos MongoDB.")
     except Exception as e:
         print(f"Error al insertar datos en MongoDB: {e}")
+
+    # Consultar todos los documentos en la colección
+    result = collection.find()
+
+    # Contar el número de documentos
+    num_documentos = collection.count_documents({})
+    # Mostrar los resultados y el contador
+    print(f"Base de datos: {db.name}")
+    print(f"Colección: {collection.name}")
+    print(f"Número total de documentos en la colección: {num_documentos}")
 # Especifica la IP o rango de IPs de tu red
-ip_range = "172.31.0.0/20"
+ip_range = "192.168.1.0/24"
 
 # Llama a la función para escanear y guardar en el archivo JSON y en la base de datos MongoDB
 scan_and_save(ip_range)

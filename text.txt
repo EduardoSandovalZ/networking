@@ -1,0 +1,22 @@
+eduardo ALL=(ALL:ALL) NOPASSWD: /home/eduardo/Documents/redes/networking/run_scan.sh
+*/10 * * * * /home/eduardo/Documents/redes/networking/run_scan.sh
+*/10 * * * * /home/eduardo/Documents/redes/networking/run_scan.sh >> /home/eduardo/Documents/redes/log_cron 2>&1
+
+
+
+* * * * * source /home/eduardo/Documents/redes/env/networking/bin/activate && /usr/bin/python /home/eduardo/Documents/redes/networking/netscan.py > /home/eduardo/Documents/redes/log_cron 2>&1
+* * * * * source /home/eduardo/Documents/redes/env/networking/bin/activate && /usr/bin/python /home/eduardo/Documents/redes/networking/netscan.py > /home/eduardo/Documents/redes/log_cron 2>&1
+
+eduardo ALL=(ALL:ALL) NOPASSWD: /home/eduardo/Documents/redes/networking/netscan.py
+
+
+* * * * * source /home/eduardo/Documents/redes/env/networking/bin/activate && /home/eduardo/Documents/redes/env/networking/bin/python3 /home/eduardo/Documents/redes/networking/netscan.py
+
+
+
+* * * * * sudo source /home/eduardo/Documents/redes/env/networking/bin/activate && /home/eduardo/Documents/redes/env/networking/bin/python3 /home/eduardo/Documents/redes/networking/netscan.py > /home/eduardo/Documents/redes/log_cron 2>&1
+* * * * * /home/eduardo/Documents/redes/networking/run_scan.sh > /home/eduardo/Documents/redes/log_cron 2>&1
+
+¿Qué tipo de VPN permite el tráfico de multidifusión y difusión a través de una VPN segura de sitio a sitio?
+
+¿Qué dos afirmaciones sobre la relación entre las LAN y las WAN son verdaderas? (Elija dos.)
